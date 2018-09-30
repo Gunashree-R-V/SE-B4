@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+    <link rel="icon" href="../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+
+    <link href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css" rel="stylesheet">
+    <link href="../public/css/mainui.css" rel="stylesheet">
+    <title>Main App UI</title>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar z-2" data-role="sidebar" data-toggle="#sidebar-toggle" id="sb1" style="left:-1px;">
+            <div class="sidebar-header color-effect" style="height:150px;top:0px;position:sticky;">
+                <a href="/" class="fg-white sub-action" onclick="Metro.sidebar.close('#sb1'); return false;"><span
+                        class="mif-arrow-left mif-2x"></span></a>
+                <span class="title fg-white" style="font-size:32px; font-weight:100; top:56px;">Name</span>
+                <span class="subtitle fg-white" style="font-size:26px; font-weight:200; top:98px;">USN</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a><span class="mif-home fg-red icon"></span>Home</a></li>
+                <li><a><span class="mif-books icon"></span>Guide</a></li>
+                <li><a><span class="mif-files-empty icon"></span>Examples</a></li>
+                <li class="divider"></li>
+                <li><a><span class="mif-enter fg-green icon"></span>Login</a></li>
+                <li><a><span class="mif-exit fg-blue icon"></span>Log Out</a></li>
+            </ul>
+        </aside>
+        <div class="aaa p-ab">
+            <div class="app-bar pos-fixed color-effect z-1" data-role="appbar" id="app-bar-1" style="height:0px;box-shadow: 0px 8px 20px 0px #888888;">
+                <button class="app-bar-item c-pointer" id="sidebar-toggle" style="padding:0px 8px;"><span class="mif-menu fg-white"
+                        style="font-size:34px;"></span></button>
+                <h1 class="brand no-hover fg-white mx-auto" style="font-size:24px;padding:0px;top:2px;left:-8px;">Transport Management System</h1>
+            </div>
+
+            <div class="p-4">
+                <!--content goes here-->
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+</body>
+
+</html>

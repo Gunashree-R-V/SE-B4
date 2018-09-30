@@ -1,0 +1,129 @@
+.color-effect {
+            background-color: #607D8B;
+            animation: bg-color 20s infinite;
+            -webkit-animation: bg-color 20s infinite;
+        }
+
+        @-webkit-keyframes bg-color {
+            0% {
+                background-color: #607D8B;
+            }
+
+            7.15% {
+                background-color: #F44336;
+            }
+
+            14.3% {
+                background-color: #F51552;
+            }
+
+            21.45% {
+                background-color: #E91E63;
+            }
+
+            28.6% {
+                background-color: #9C27B0;
+            }
+
+            35.75% {
+                background-color: #3F51B5;
+            }
+
+            42.9% {
+                background-color: #03A9F4;
+            }
+
+            50.05% {
+                background-color: #009688;
+            }
+
+            57.2% {
+                background-color: rgb(112, 224, 52);
+            }
+
+            64.35% {
+                background-color: #FDD835;
+            }
+
+            71.5% {
+                background-color: rgb(250, 152, 4);
+            }
+
+            78.65% {
+                background-color: rgb(165, 81, 12);
+            }
+
+            85.8% {
+                background-color: #795548;
+            }
+
+            92.95% {
+                background-color: #9E9E9E;
+            }
+
+            100% {
+                background-color: #607D8B;
+            }
+        }
+
+        @keyframes bg-color {
+            0% {
+                background-color: #607D8B;
+            }
+
+            7.15% {
+                background-color: #F44336;
+            }
+
+            14.3% {
+                background-color: #F51552;
+            }
+
+            21.45% {
+                background-color: #E91E63;
+            }
+
+            28.6% {
+                background-color: #9C27B0;
+            }
+
+            35.75% {
+                background-color: #3F51B5;
+            }
+
+            42.9% {
+                background-color: #03A9F4;
+            }
+
+            50.05% {
+                background-color: #009688;
+            }
+
+            57.2% {
+                background-color: rgb(112, 224, 52);
+            }
+
+            64.35% {
+                background-color: #FDD835;
+            }
+
+            71.5% {
+                background-color: rgb(250, 152, 4);
+            }
+
+            78.65% {
+                background-color: rgb(165, 81, 12);
+            }
+
+            85.8% {
+                background-color: #795548;
+            }
+
+            92.95% {
+                background-color: #9E9E9E;
+            }
+
+            100% {
+                background-color: #607D8B;
+            }
+        }
