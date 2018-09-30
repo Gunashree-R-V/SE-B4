@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+    <link rel="icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+
+    <link href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css" rel="stylesheet">
+    <title>Registeration Form</title>
+    <style>
+        .blur-image-bg{
+        /* The image used */
+        background-image: url("../../public/img/bangalore-layout-14-1452760791.jpg");
+
+        /* Add the blur effect */
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    body, html{
+        height:100%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="blur-image-bg"></div>
+    <div class="container" style="top: -100%;">
+        <div class="p-2 m-2 border-dashed bd-red border-size-1">
+            <h1>Registration Form</h1>
+            <form data-role="validator" action="javascript:" class="p-1 mt-4 mb-4">
+                <input class="mt-2" type="text" data-role="input" data-prepend="Name:" data-validate="required">
+                <span class="invalid_feedback ani-horizontal">Required</span>
+                <input class="mt-2" type="text" data-role="input" data-prepend="USN:" data-validate="required">
+                <span class="invalid_feedback ani-horizontal">Required</span>
+                <input class="mt-2 mb-2" type="email" data-role="input" data-prepend="Email:" data-validate="email">
+                <span class="invalid_feedback ani-horizontal">Required</span>
+                <div class="mb-4">
+                    <label>Contact Number:</label>
+                    <input type="text" data-role="input" data-prepend="+91" data-validator="required number length=10">
+                    <span class="invalid_feedback ani-horizontal">Required or Invalid value</span>
+                </div>
+                <div class="p-1 m-2">
+                    <label>Parent/Guardian Details</label>
+                    <div class="mb-2">
+                        <input class="mb-2" type="text" data-role="input" data-prepend="Name:" data-validate="required">
+                        <span class="invalid_feedback ani-horizontal">Required</span>
+                        <label>Contact Number:</label>
+                        <input class="mb-2" type="text" data-role="input" data-prepend="+91" data-validator="required number length=10">
+                        <span class="invalid_feedback ani-horizontal">Required or Invalid value</span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label>Program:</label>
+                    <select data-role="select">
+                        <option selected>None</option>
+                        <option>B.Tech</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label>Branch:</label>
+                    <select data-role="select">
+                        <option selected>None</option>
+                        <option>Computer Science Engineering</option>
+                        <option>Electronics and Communication Engineering</option>
+                        <option>Electronics and Electricals Engineering</option>
+                        <option>Civil Engineering</option>
+                        <option>Mechanical Engineering</option>
+                        <option>Engineering in Biotechnology</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label>Semester:</label>
+                    <select data-role="select">
+                        <option selected>1st</option>
+                        <option>2nd</option>
+                        <option>3rd</option>
+                        <option>4th</option>
+                        <option>5th</option>
+                        <option>6th</option>
+                        <option>7th</option>
+                        <option>8th</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label>Drop a marker on your home location</label>
+                    <div data-role="panel">
+                        <button type="button" style="width:100%;" value="Drop Pin" onclick="dropPin()">Drop the Pin</button>
+                        <div id="map"></div>
+                        <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Latitude,Longitude"
+                            disabled>
+                        <style>
+                            #map {
+                                height: 400px;
+                            }
+                        </style>
+                        <script src="https://maps.googleapis.com/maps/api/js"></script>
+                        <script>
+                            var directionsDisplay;
+                            var directionsService = new google.maps.DirectionsService();
+                            var map;
+                            var endMarker;
+
+                            function initialize() {
+                                directionsDisplay = new google.maps.DirectionsRenderer();
+                                var bengaluru = new google.maps.LatLng(12.971599, 77.594566);
+                                var mapOptions = {
+                                    zoom: 7,
+                                    center: bengaluru
+                                }
+                                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                                //directionsDisplay.setMap(map);
+                            }
+
+                            function dropPin() {
+                                // if any previous marker exists, let's first remove it from the map
+                                if (endMarker) {
+                                    endMarker.setMap(null);
+                                }
+                                // create the marker
+                                endMarker = new google.maps.Marker({
+                                    position: map.getCenter(),
+                                    map: map,
+                                    draggable: true,
+                                });
+                                copyMarkerpositionToInput();
+                                // add an event "onDrag"
+                                google.maps.event.addListener(endMarker, 'dragend', function () {
+                                    copyMarkerpositionToInput();
+                                });
+                            }
+
+                            function copyMarkerpositionToInput() {
+                                // get the position of the marker, and set it as the value of input
+                                document.getElementById("end").value = endMarker.getPosition().lat() + ',' + endMarker.getPosition().lng();
+                            }
+
+                            /*function calcRoute() {
+                                var start = document.getElementById("start").value;
+                                var end = document.getElementById("end").value;
+                                var request = {
+                                    origin: start,
+                                    destination: end,
+                                    travelMode: google.maps.TravelMode.DRIVING
+                                };
+                                directionsService.route(request, function (result, status) {
+                                    if (status == google.maps.DirectionsStatus.OK) {
+                                        directionsDisplay.setDirections(result);
+                                    }
+                                });
+                            }*/
+                            google.maps.event.addDomListener(window, 'load', initialize);
+                        </script>
+                        <div class="mx-auto mt-2">
+                            <button type="submit" class="button primary">Submit the form</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+</body>
