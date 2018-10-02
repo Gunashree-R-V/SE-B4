@@ -4,27 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
-    <link rel="icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+    <link rel="icon" href="../img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
 
     <link href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css" rel="stylesheet">
-    <link href="../../public/css/signup.css" rel="stylesheet">
-    <link href="../../public/css/mainui.css" rel="stylesheet">
-    <title>Registeration Form</title>
+    <link href="../css/signup.css" rel="stylesheet">
+    <link href="../css/mainui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script>
+    <title>SignUp Form</title>
 </head>
 
 <body>
     <div class="blur-image-bg"></div>
-    <div class="container" style="top: -100%;">
+    <div class="container signup-container">
         <div class="aaa p-ab">
-            <div class="app-bar pos-fixed color-effect z-1" data-role="appbar" id="app-bar-1" style="height:0px;box-shadow: 0px 8px 20px 0px #888888;">
-                <button class="app-bar-item c-pointer" id="sidebar-toggle" style="padding:0px 8px;"><span class="mif-arrow-left fg-white"
-                        style="font-size:34px;"></span></button>
-                <h1 class="brand no-hover fg-white mx-auto" style="font-size:24px;padding:0px;top:2px;left:-8px;">Transport
+            <div class="app-bar cappbar pos-fixed color-effect z-1" data-role="appbar" id="app-bar-1">
+                <button class="app-bar-item cappbar-item c-pointer" id="sidebar-toggle" style="padding:0px 5px;">
+                    <a href="login.html">
+                        <span class="mif-arrow-left fg-white cappbar-menu"></span>
+                    </a>
+                </button>
+                <h1 class="brand cappbar-header no-hover fg-white mx-auto">Transport
                     Management System</h1>
             </div>
             <div class="p-2 m-2 border-dashed bd-red border-size-1">
-                <h1>Registration Form</h1>
+                <h1>SignUp Form</h1>
                 <form data-role="validator" action="javascript:" class="p-1 mt-4 mb-4">
                     <input class="mt-2" type="text" data-role="input" data-prepend="Name:" data-validate="required">
                     <span class="invalid_feedback ani-horizontal">Required</span>
@@ -80,9 +87,9 @@
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label>Drop a marker on your home location</label>
+                        <label>Drop marker on your home location</label>
                         <div data-role="panel">
-                            <button type="button" style="width:100%;" value="Drop Pin" onclick="dropPin()">Drop the Pin</button>
+                            <!--<button type="button" style="width:100%;" value="Drop Pin" onclick="dropPin()">Drop the Pin</button>
                             <div id="map"></div>
                             <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Latitude,Longitude"
                                 disabled>
@@ -90,9 +97,50 @@
                                 #map {
                                 height: 400px;
                             }
-                        </style>
+                            </style>
                             <script src="https://maps.googleapis.com/maps/api/js"></script>
-                            <script src="../../public/js/mapMarker.js"></script>
+                            <script src="../../public/js/mapMarker.js"></script>-->
+                            <div id="mapid"></div>
+                            <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Lat.,Long."
+                                disabled>
+                            <style>
+                                #mapid {
+                                height: 400px;
+                            }
+                            </style>
+                            <script>
+
+                                var mymap = L.map('mapid').setView([12.971599, 77.594566], 8.5);
+                                var endMarker;
+
+                                L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                                    subdomains: ['a', 'b', 'c'],
+                                    maxZoom: 18
+                                }).addTo(mymap);
+
+                                var popup = L.popup();
+
+                                function onMapClick(e) {
+                                    if (endMarker) {
+                                        endMarker.remove(mymap);
+                                    }
+
+                                    popup
+                                        .setLatLng(e.latlng);
+                                    //.setContent("You clicked the map at " + e.latlng.toString())
+                                    endMarker = L.marker(e.latlng, {
+                                        draggable: true,
+                                        autoPan: true
+                                    }).addTo(mymap);
+                                    var l = e.latlng.toString();
+                                    var lllength = l.length;
+                                    document.getElementById('end').value = l.slice(7, lllength - 1);
+                                }
+
+                                mymap.on('click', onMapClick);
+
+                            </script>
                             <div class="mx-auto mt-2">
                                 <button type="submit" class="button primary">Submit the form</button>
                             </div>

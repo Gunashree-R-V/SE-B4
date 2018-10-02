@@ -8,7 +8,7 @@ server.use(express.static('public'));
 server.use(express.static('views'));
 
 server.listen(server.get('PORT'), () => {
-    console.log(`Server is running at http://localhost:${server.get('port')} in ${server.get('env')} mode`);
+    console.log(`Server is running at http://localhost:${server.get('PORT')} in ${server.get('env')} mode`);
 });
 
 server.get('/', (req, res, next) => {

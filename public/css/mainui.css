@@ -127,3 +127,37 @@
                 background-color: #607D8B;
             }
         }
+.csidebar{
+    left:-1px;
+}
+.csidebar-header{
+    height:150px;
+    top:0px;
+    position:sticky;
+}
+.csidebar-title{
+    font-size:32px;
+    font-weight:100;
+    top:56px;
+}
+.csidebar-subtitle{
+    font-size:26px;
+    font-weight:200;
+    top:98px;
+}
+.cappbar{
+    height:0px;
+    box-shadow: 0px 8px 20px 0px #888888;
+}
+.cappbar-item{
+    padding:0px 8px;
+}
+.cappbar-menu{
+    font-size:34px;
+}
+.cappbar-header{
+    font-size:24px;
+    padding:0px;
+    top:2px;
+    left:-8px;
+}

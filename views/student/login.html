@@ -1,70 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-    <link rel="shortcut icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
-    <link rel="icon" href="../../public/img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+
+    <link rel="shortcut icon" href="../img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
+    <link rel="icon" href="../img/Graphicloads-Transport-Bus-4.ico" type="image/x-icon">
 
     <!-- Metro 4 -->
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-    <link rel="stylesheet" href="../../public/css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
 
     <title>Login for Student</title>
-
-    <style>
-        .login-form {
-            width: 350px;
-            height: auto;
-            top: 50%;
-            margin-top: -160px;
-        }
-    </style>
 </head>
+
 <body class="h-vh-100">
     <div class="bg-student"></div>
-    <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"
-          style="top:-50%;"
-          data-role="validator"
-          action="javascript:"
-          data-clear-invalid="2000"
-          data-on-error-form="invalidForm"
-          data-on-validate-form="validateForm">
-        <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
+    <form class="login-form clogin-pos bg-white p-6 mx-auto border bd-default win-shadow" data-role="validator"
+        action="javascript:" data-clear-invalid="2000" data-on-error-form="invalidForm" data-on-validate-form="validateForm">
+        <span class="mif-vpn-lock mif-4x place-right mt-2-minus"></span>
         <h2 class="text-light">Login to service</h2>
         <hr class="thin mt-4 mb-4 bg-white">
         <div class="form-group">
             <input type="text" data-role="input" data-prepend="<span class='mif-envelop'>" placeholder="Enter your USN...">
         </div>
         <div class="form-group">
-            <input type="password" data-role="input" data-prepend="<span class='mif-key'>" placeholder="Enter your password..." data-validate="required minlength=6">
+            <input type="password" data-role="input" data-prepend="<span class='mif-key'>" placeholder="Enter your password..."
+                data-validate="required minlength=6">
         </div>
         <div class="form-group mt-10">
             <input type="checkbox" data-role="checkbox" data-caption="Remember me" class="place-right">
             <button class="button">Login</button>
-            <button class="button">Signup</button>
+            <button class="button"><a href="signup.html">Signup</a></button>
             <a href="#">Forgot the Password...?</a>
         </div>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    <script>
-        function invalidForm(){
-            var form  = $(this);
-            form.addClass("ani-ring");
-            setTimeout(function(){
-                form.removeClass("ani-ring");
-            }, 1000);
-        }
-
-        function validateForm(){
-            $(".login-form").animate({
-                opacity: 0
-            });
-        }
-    </script>
 
 </body>
+
 </html>
