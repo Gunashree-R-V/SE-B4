@@ -89,17 +89,6 @@
                     <div class="mb-4">
                         <label>Drop marker on your home location</label>
                         <div data-role="panel">
-                            <!--<button type="button" style="width:100%;" value="Drop Pin" onclick="dropPin()">Drop the Pin</button>
-                            <div id="map"></div>
-                            <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Latitude,Longitude"
-                                disabled>
-                            <style>
-                                #map {
-                                height: 400px;
-                            }
-                            </style>
-                            <script src="https://maps.googleapis.com/maps/api/js"></script>
-                            <script src="../../public/js/mapMarker.js"></script>-->
                             <div id="mapid"></div>
                             <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Lat.,Long."
                                 disabled>
@@ -126,9 +115,7 @@
                                         endMarker.remove(mymap);
                                     }
 
-                                    popup
-                                        .setLatLng(e.latlng);
-                                    //.setContent("You clicked the map at " + e.latlng.toString())
+                                    popup.setLatLng(e.latlng);
                                     endMarker = L.marker(e.latlng, {
                                         draggable: true,
                                         autoPan: true
