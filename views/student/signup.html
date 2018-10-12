@@ -16,8 +16,8 @@
     <body>
         <div class="blur-image-bg"></div>
         <div class="container signup-container">
-            <div class="aaa p-ab">
-                <div class="app-bar cappbar pos-fixed color-effect z-1" data-role="appbar" id="app-bar-1">
+            <div class="p-ab">
+                <div class="app-bar cappbar color-effect z-1" data-role="appbar" id="app-bar-1">
                     <button class="app-bar-item cappbar-item c-pointer" id="sidebar-toggle" style="padding:0px 5px;">
                         <a href="login.html">
                             <span class="mif-arrow-left fg-white cappbar-menu"></span>
@@ -28,39 +28,32 @@
                 <div class="p-2 m-2 border-dashed bd-red border-size-1">
                     <h1>SignUp Form</h1>
                     <label class="fg-red required-mark">* : Required</label>
-                    <form data-role="validator" action="javascript:" class="p-1 mt-4 mb-4">
-                        <input class="mt-2" id="name" type="text" data-role="input" data-prepend="Name<span class='fg-red required-mark'>*</span>:" data-validate="required">
-                        <span class="invalid_feedback ani-horizontal">Required</span>
-                        <input class="mt-2" id="usn" type="text" data-role="input" data-prepend="USN<span class='fg-red required-mark'>*</span>:" data-validate="required">
-                        <span class="invalid_feedback ani-horizontal">Required</span>
-                        <div id="usn_response" class="response"></div>
-                        <input class="mt-2 mb-2" id="email" type="email" data-role="input" data-prepend="Email<span class='fg-red required-mark'>*</span>:" data-validate="email">
-                        <span class="invalid_feedback ani-horizontal">Required</span>
+                    <form class="p-1 mt-4 mb-4">
+                        <input class="mt-2" id="name" type="text" data-role="input" data-prepend="Name<span class='fg-red required-mark'>*</span>:" />
+                        <input class="mt-2" id="usn" type="text" data-role="input" data-prepend="USN<span class='fg-red required-mark'>*</span>:" />
+                        <span id="usn_response" class="response"></span>
+                        <input class="mt-2 mb-2" id="email" type="email" data-role="input" data-prepend="Email<span class='fg-red required-mark'>*</span>:" />
                         <div class="mb-4">
                             <label>Contact Number<span class="fg-red required-mark">*</span>:</label>
-                            <input id="contact" type="text" data-role="input" data-prepend="+91" data-validator="required number length=10">
-                            <span class="invalid_feedback ani-horizontal">Required or Invalid value</span>
+                            <input id="contact" type="text" data-role="input" data-prepend="+91" />
                         </div>
                         <div class="p-1 m-2">
                             <label>Parent/Guardian Details</label>
                             <div class="mb-2">
-                                <input class="mb-2" id="parentName" type="text" data-role="input" data-prepend="Name<span class='fg-red required-mark'>*</span>:" data-validate="required">
-                                <span class="invalid_feedback ani-horizontal">Required</span>
+                                <input class="mb-2" id="parentName" type="text" data-role="input" data-prepend="Name<span class='fg-red required-mark'>*</span>:" />
                                 <label>Contact Number<span class="fg-red required-mark">*</span>:</label>
-                                <input class="mb-2" id="parentContact" type="text" data-role="input" data-prepend="+91" data-validator="required number length=10">
-                                <span class="invalid_feedback ani-horizontal">Required or Invalid value</span>
+                                <input class="mb-2" id="parentContact" type="text" data-role="input" data-prepend="+91" />
                             </div>
                         </div>
                         <div class="mb-4">
-                            <label>Drop marker on your home location<span class="fg-red required-mark">*</span></label>
+                            <label>Drop marker on a pickup location (e.g.: Main Road) near to your home location<span class="fg-red required-mark">*</span></label>
                             <div data-role="panel">
                                 <div id="map"></div>
-                                <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Lat.,Long."
-                                disabled>
-                                <div class="mx-auto mt-2">
-                                    <button type="submit" id="regForm" class="button primary">Submit the form</button>
-                                </div>
                             </div>
+                            <input class="mt-4 mb-4 ml-2 mr-2" type="text" data-role="input" id="end" data-prepend="Lat.,Long." style="width:100%!important;"  />
+                        </div>
+                        <div class="mx-auto mt-2">
+                            <button type="submit" id="regForm" class="button bg-darkBlue fg-white" disabled="disabled">Submit the form</button>
                         </div>
                     </form>
                 </div>
@@ -72,5 +65,114 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
         <script type="text/javascript" src="/js/signup.js"></script>
-    </body>
+        <script>
+            $(document).ready(function(){
+                $('#name').focusout(function(){
+                    var empty = false;
+                    $('#name').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#usn').focusout(function(){
+                    var empty = false;
+                    $('#usn').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#email').focusout(function(){
+                    var empty = false;
+                    $('#email').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#contact').focusout(function(){
+                    var empty = false;
+                    $('#contact').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#parentName').focusout(function(){
+                    var empty = false;
+                    $('#parentName').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#parentContact').focusout(function(){
+                    var empty = false;
+                    $('#parentContact').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+                $('#end').focusout(function(){
+                    var empty = false;
+                    $('#end').each(function(){
+                        if ($(this).val().length == 0){
+                            empty = true;
+                        }
+                    });
+                    
+                    if (empty){
+                        $('#regForm').attr('disabled','disabled');
+                    }
+                    else{
+                        $('#regForm').removeAttr('disabled');
+                    }
+                });
+            });
+        </script>
+</body>
 </html>
