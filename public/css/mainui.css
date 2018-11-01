@@ -215,10 +215,9 @@
 }
 .navview .navview-menu{
     height:100%!important;
-    padding-top:15px;
 }
 .navview .item-separator {
-    height: 1px!important;
+    height: 2px!important;
     background-color: #0000001f;
     cursor: default;
 }
@@ -238,7 +237,7 @@
     left:auto;    
     background-color: #ffffff;
     color: #257cad;
-    border-bottom:1px solid #e5e5e5;
+    border-bottom:2px solid #e5e5e5;
 }
 .d-menu li a{
     min-width:auto;
@@ -256,7 +255,7 @@
     /*-webkit-filter: grayscale(100%);
     filter: grayscale(100%);*/
     border-radius: 25px;
-    margin:18px 0px 0px 2px;
+    margin:16px 0px 0px 2px;
     width: 90px;
 }
 .navview .navview-menu li a{
