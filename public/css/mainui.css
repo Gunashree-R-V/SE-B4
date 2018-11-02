@@ -225,7 +225,7 @@
     background-color: #ffffff;
     color: #000;
     border: 0px;
-    border-left: 4px solid blue;
+    border-left: 4px solid crimson;
 }
 .navview .navview-menu li a:hover:not(:active), .navview .navview-menu .ui-selecting{
     background-color: #203432;
