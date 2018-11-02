@@ -1,6 +1,44 @@
 const pg = require('pg');
 const config = require('../config');
 
+var resUser = {};
+
+const fetchFutureTrips = (userUSN) => {
+    const clientTrip = new pg.Client(config);
+    const futureTripQuery = `SELECT Fut_trip.trip_id , Fut_trip.drop_pick,Fut_trip.trip_date, Fut_trip.timing
+                            FROM Fut_trip
+                            WHERE Fut_trip.trip_id NOT IN (
+                            SELECT Cancel_trip.trip_id FROM Cancel_trip
+                            INNER JOIN USN_UID ON Cancel_trip.UID = USN_UID.UID
+                            WHERE USN_UID.USN = '${userUSN}') 
+                            ORDER BY Fut_trip.trip_id
+                            limit 10;`;
+    return new Promise((resolve, reject) => {
+        clientTrip.connect()
+        .then(() => 
+            clientTrip.query(futureTripQuery)
+                .then(res => {
+                        resUser.futureTrips = [];
+                        res.rows.forEach(row => {
+                            resUser.futureTrips.push(row);
+                        });
+                })
+                .catch(err => {
+                    reject(err);
+                    console.log(`Fetch error: ${err}`);
+                })
+                .then(() => {
+                    resolve(resUser.futureTrips);
+                    clientTrip.end();
+                })
+        )
+        .catch(err => {
+            reject(err);
+            console.log(`Connection error: ${err}`);
+        });
+    });
+}
+
 /**
  * Checks the availability of the USN during registration
  * @param user
@@ -19,7 +57,7 @@ const validateLogin =  (user) => {
             }
         }
         else {
-            const client = new pg.Client(config)
+            const client = new pg.Client(config);
             client.connect()
                 .then(() => {
                     var userQuery;
@@ -38,6 +76,16 @@ const validateLogin =  (user) => {
                         .then( res => {
                                 res.rows.forEach(row => {
                                     resUser.name = row[response];
+                                    resUser.futureTrips = [];
+                                    if(resUser.id == 'student'){
+                                        fetchFutureTrips(resUser.usn).then(futureTrips => {
+                                            resUser.futureTrips = futureTrips;
+                                            resolve(resUser);
+                                        });
+                                    }
+                                    else if(resUser.id == 'driver'){
+                                        resolve(resUser);
+                                    }
                                 });
                         })
                         .catch(err => {
@@ -46,7 +94,6 @@ const validateLogin =  (user) => {
                         })
                         .then(() => {
                             client.end();
-                            resolve(resUser);
                         });
                 })
                 .catch(err => {
@@ -56,4 +103,5 @@ const validateLogin =  (user) => {
         }
     });
 }
+
 module.exports = validateLogin;

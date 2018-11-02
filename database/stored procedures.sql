@@ -57,3 +57,18 @@ $$ LANGUAGE 'plpgsql';
 
 SELECT studentCancels('01FB15ECS083',2) ;
 
+CREATE OR REPLACE FUNCTION studentFutureTrips(_USN VARCHAR)
+RETURNS void AS $$
+BEGIN
+SELECT Fut_trip.trip_id , Fut_trip.drop_pick,Fut_trip.trip_date, Fut_trip.timing
+FROM Fut_trip
+WHERE Fut_trip.trip_id NOT IN (
+SELECT Cancel_trip.trip_id FROM Cancel_trip
+INNER JOIN USN_UID ON Cancel_trip.UID = USN_UID.UID
+WHERE USN_UID.USN = _USN)
+ORDER BY Fut_trip.trip_id
+limit 14
+END;
+$$ LANGUAGE 'plpgsql';
+
+SELECT studentFutureTrips('01FB15ECS001');
