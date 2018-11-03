@@ -14,89 +14,117 @@
 
 <body>
     <div class="fluid-container">
-        <div data-role="navview" data-compact="false" data-expanded="fs" class="open">
-            <nav class="navview-pane pos-fixed">
-                <div class="ml-1 mr-1 pt-6 pb-6">
+        <div class="navcontent">
+            <div class="csidenav">
+                <div class="pt-6 pb-4 colorBrand">
                     <img src="/img/Graphicloads-Transport-Bus-4.ico" class="pos-absolute" />
                     <div class="cbrand">
                         <span>Transport Management System</span>
                     </div>
                 </div>
-                <div class="item-separator"></div>
-
-                <ul class="navview-menu">
-                    <li class="ui-widget-content">
-                        <a href="#">
+                <div class="brand-separator"></div>
+                <ul data-tabs-position="vertical h-100" data-role="tabs">
+                    <li>
+                        <a href="#_target_1">
                             <span class="icon"><span class="mif-users"></span></span>
                             <span class="caption">Student Approval</span>
                         </a>
                     </li>
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_2">
                             <span class="icon"><span class="mif-notification"></span></span>
                             <span class="caption">Notify Student</span>
                         </a>
                     </li>
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_3">
                             <span class="icon"><span class="mif-profile"></span></span>
                             <span class="caption">Drivers</span>
                         </a>
                     </li>
 
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_4">
                             <span class="icon"><span class="mif-blocked"></span></span>
                             <span class="caption">Block User</span>
                         </a>
                     </li>
 
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_5">
                             <span class="icon"><span class="mif-flag"></span></span>
                             <span class="caption" style="line-height: 24px;">Addition/Deletion<br>of a User</span>
                         </a>
                     </li>
 
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_6">
                             <span class="icon"><span class="mif-drive-eta"></span></span>
                             <span class="caption">Update Driver</span>
                         </a>
                     </li>
 
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_7">
                             <span class="icon"><span class="mif-bus"></span></span>
                             <span class="caption">Update Buses</span>
                         </a>
                     </li>
 
-                    <li class="ui-widget-content">
-                        <a href="#">
+                    <li>
+                        <a href="#_target_8">
                             <span class="icon"><span class="mif-location"></span></span>
                             <span class="caption">Track Buses</span>
                         </a>
                     </li>
                 </ul>
-            </nav>
-
-            <div class="navview-content">
-                <div data-role="appbar" data-expand-point="md" class="admin-appbar" dir="rtl">
+            </div>
+            <div class="admin-content">
+                <div data-role="appbar" data-expand-point="md" class="admin-appbar flex-justify-end">
                     <ul class="app-bar-menu">
                         <li>
                             <a href="#" class="dropdown-toggle">Admin</a>
-                            <ul class="d-menu" data-role="dropdown">
-                                <li><a href="#">Profile Settings<span class="mif-tools mif-lg mr-3"></span></a></li>
+                            <ul class="d-menu drop-left" data-role="dropdown">
+                                <li><a href="#"><span class="mif-tools mif-lg mr-3"></span>Profile Settings</a></li>
                                 <li class="divider bg-lightGray"></li>
-                                <li><a href="login.html">Logout<span class="mif-exit mif-lg mr-3"></span></a></li>
+                                <li><a href="login.html"><span class="mif-exit mif-lg mr-3"></span>Logout</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="fluid-container pl-5-md pr-4-md pt-8 mt-8">
-                    <div>
-
+                    <div id="_target_1">
+                        <h1><span class="icon"><span class="mif-users"></span></span>
+                            <span class="caption">Student Approval</span></h1>
+                    </div>
+                    <div id="_target_2">
+                        <h1><span class="icon"><span class="mif-notification"></span></span>
+                            <span class="caption">Notify Student</span></h1>
+                    </div>
+                    <div id="_target_3">
+                        <h1><span class="icon"><span class="mif-profile"></span></span>
+                            <span class="caption">Drivers</span></h1>
+                    </div>
+                    <div id="_target_4">
+                        <h1><span class="icon"><span class="mif-blocked"></span></span>
+                            <span class="caption">Block User</span></h1>
+                    </div>
+                    <div id="_target_5">
+                        <h1><span class="icon"><span class="mif-flag"></span></span>
+                            <span class="caption" style="line-height: 24px;">Addition/Deletion<br>of a User</span>
+                        </h1>
+                    </div>
+                    <div id="_target_6">
+                        <h1><span class="icon"><span class="mif-drive-eta"></span></span>
+                            <span class="caption">Update Driver</span></h1>
+                    </div>
+                    <div id="_target_7">
+                        <h1><span class="icon"><span class="mif-bus"></span></span>
+                            <span class="caption">Update Buses</span></h1>
+                    </div>
+                    <div id="_target_8">
+                        <h1><span class="icon"><span class="mif-location"></span></span>
+                            <span class="caption">Track Buses</span></h1>
                     </div>
                 </div>
             </div>
@@ -104,12 +132,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function(){
-            $(".navview-menu").selectable();
-        });
-    </script>
 </body>
 
 </html>
