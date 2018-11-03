@@ -199,9 +199,8 @@
 }
 .sidebar-header~.sidebar-menu{
     height: auto!important;
-}.navcontent .csidenav .colorBrand img {
-    /*-webkit-filter: grayscale(100%);
-    filter: grayscale(100%);*/
+}
+.navcontent .csidenav .colorBrand img {
     border-radius: 25px;
     margin: 16px 0px 0px 2px;
     width: 90px;
