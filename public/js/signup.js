@@ -74,6 +74,19 @@ $("#regForm").click(function(){
                     }
                 ]
             });
+            /*Metro.toast.create("You have successfully registered!", function(){
+                var noting = Metro.notify;
+                noting.setup({
+                    width: 300,
+                    duration: 5000
+                });
+                noting.create("You will be redirected to the login page in 5 seconds","Alert",{
+                    cls: "alert",
+                    onClose: function(){
+                        window.location = `${location.protocol}//${location.host}/student/login.html`;
+                    }
+                });
+            }, 5000, "success");*/
             
         }
     });
