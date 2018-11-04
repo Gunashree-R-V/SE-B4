@@ -72,3 +72,29 @@ END;
 $$ LANGUAGE 'plpgsql';
 
 SELECT studentFutureTrips('01FB15ECS001');
+
+CREATE OR REPLACE FUNCTION getLocation(_USN VARCHAR, _tripid INT)
+RETURNS RECORD  AS $$
+DECLARE location RECORD;
+BEGIN
+IF (SELECT COUNT(Chan_loc.UID)
+FROM Chan_loc  INNER JOIN USN_UID
+ON USN_UID.UID = Chan_loc.UID
+WHERE USN = _USN AND trip_id = _tripid)>0 THEN
+     SELECT latitude AS latitude, longitude AS longitude 
+     FROM Chan_loc
+     INNER JOIN USN_UID ON USN_UID.UID = Chan_loc.UID
+     AND USN_UID.USN =_USN AND trip_id = _tripid
+     INTO location;
+ELSE
+   SELECT latitude AS latitude, longitude AS longitude
+    FROM Stu_Trip_Data
+    INNER JOIN  USN_UID ON USN_UID.UID = Stu_trip_Data.UID
+    WHERE USN_UID.USN =_USN
+    INTO location;
+END IF ;
+RETURN location;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT getLocation('01FB15ECS084',1);

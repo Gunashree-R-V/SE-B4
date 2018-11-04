@@ -3,7 +3,7 @@ const config = require('../config');
 
 /**
  * Checks the availability of the USN during registration
- * @param {USN of the student} usn 
+ * @param {} usn 
  * @returns Promise<boolean> 
  */
 const doesUSNExist =  (usn) => {
@@ -46,7 +46,7 @@ const generatePassword = (length) => {
 
 /**
  * Insert student details into database while registration
- * @param {JSON object containing student details} user
+ * @param {} user
  * @returns Promise<boolean>
  */
 const addStudent = (user) => {

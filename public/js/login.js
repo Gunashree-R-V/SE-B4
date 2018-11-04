@@ -1,3 +1,41 @@
+$('#forgotPassword').on('click', function(){
+    Metro.dialog.create({
+        title: "Enter the USN",
+        content: `<input type="text" id="forgotUsn" data-role="input" data-prepend="<span class='mif-envelop'>" placeholder="Enter your USN..." required>`,
+        actions: [
+            {
+                caption: "Send",
+                cls: "js-dialog-close alert",
+                onclick: function(){
+                    var url = `/forgotPassword`;
+                    data = { usn : $('#forgotUsn').val() };
+                    success = (mail) => {
+                        if(mail.sent) {
+                            alert('Sent successfully to your registered mail ID');
+                        }
+                        else {
+                            alert("Invalid USN!!");
+                        }
+                    }
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        data: data,
+                        success: success,
+                    });
+                }
+            },
+            {
+                caption: "Cancel",
+                cls: "js-dialog-close",
+                onclick: function(){
+                }
+            }
+        ]
+    });
+    return false;
+});
+
 $('#usn,#password,#dId,#pass,#AId,#pass').keyup(function(){
     if ($(this).val()) {
         $('[id^=login]').attr('disabled', false);

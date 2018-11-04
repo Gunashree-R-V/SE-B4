@@ -16,4 +16,30 @@ $(document).ready(function(){
         ]
         });
     });
+
+    $('#SOS').click(() => {
+        const usn = document.getElementById('studentUSN').innerHTML;
+        const pickupAddress = document.getElementById('pickUp').innerHTML;
+        const dropAddress = document.getElementById('drop').innerHTML;
+        emergencyRequest({usn: usn.replace(/\s+/g, ''), pickUp: pickupAddress, drop: dropAddress}, '/sos');
+    });
+    
+    emergencyMessage = () => {
+        alert('Alert sent to admin');
+    }
+    
+    emergencyError = (error) => {
+        console.log(error);
+        alert('Unable to alert the admin');
+    }
+    
+    emergencyRequest = (data, url) => {
+        $.ajax({
+            url:url,
+            data:data,
+            method:'GET',
+            success:emergencyMessage,
+            error:emergencyError
+        });    
+    }
 });
