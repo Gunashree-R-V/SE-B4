@@ -74,7 +74,7 @@ $(document).ready(function(){
     }
     $('#proD').click(function(){ //id for profile details
         $('.p-4').empty();
-        $('.p-4').html('<h3>My Profile Data</h3><form class="p-1 mt-4 mb-4"><input class="mt-2" id="name" type="text" data-role="input" data-clear-button="false" data-prepend="Name" /><input class="mt-2" id="usn" type="text" data-role="input" data-clear-button="false" data-prepend="USN" /><input class="mt-2 mb-2" id="email" type="email" data-role="input" data-clear-button="false" data-prepend="Email" /><div class="mb-4"><label>Contact Number</label><input id="contact" type="text" data-role="input" data-clear-button="false" data-prepend="+91" /></div>');
+        $('.p-4').append('<h3>My Profile Data</h3><form class="p-1 mt-4 mb-4"><input class="mt-2" id="name" type="text" data-role="input" data-clear-button="false" data-prepend="Name" /><input class="mt-2" id="usn" type="text" data-role="input" data-clear-button="false" data-prepend="USN" /><input class="mt-2 mb-2" id="email" type="email" data-role="input" data-clear-button="false" data-prepend="Email" /><div class="mb-4"><label>Contact Number</label><input id="contact" type="text" data-role="input" data-clear-button="false" data-prepend="+91" /></div>');
         $('input').attr('disabled','disabled');
         $('input[type=text]:disabled, input[type=email]:disabled').css('background-color','#fff');
         $('#name').val('Babayaga'); //dummy value
