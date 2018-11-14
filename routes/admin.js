@@ -1,6 +1,9 @@
 const express = require('express');
 const adminRouter = express.Router();
+
+
 const { approveUser, blockUser ,getUsers, getTrips, getBlockUsers, updateTrips, tripJson } = require('../controllers/admin');
+
 const { sendEmail } = require('../controllers/login');
 adminRouter.get('/userList', (req, res, next) => {
     getUsers()
@@ -28,6 +31,7 @@ adminRouter.get('/getTripDetails/:route_no',(req,res,next) =>
   });
 });
 
+
 adminRouter.get('/blockUserList', (req, res, next) => {
     getBlockUsers()
         .then(users => {
@@ -42,6 +46,7 @@ adminRouter.get('/blockUserList', (req, res, next) => {
         })
         .catch(err => console.log(err));
 });
+
 
 
 adminRouter.post('/admin/:id', (req, res, next) => {

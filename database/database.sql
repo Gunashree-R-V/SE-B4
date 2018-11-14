@@ -1,42 +1,3 @@
-/*To create this database locally in your system  follow the following steps
-
-	1. Install PostgreSQL locally in your system . Follow the following steps to intsall it if not installed in ubuntu
-		1.Open the terminal (Ctrl+Alt+T)
-		2. Type $ sudo apt-get update
-		3. Type $ sudo apt-get install postgresql postgresql-contrib 
-	2. Switch over postgres account on your server by typing 
-		$ sudo -i -u postgres
-	3. Now access the postgres prompt by typing 
-		$ psql
-
-	4.Now create the database 'Transport_Mangement_System' by typing the following command
-		CREATE DATABASE transport_management_system ;
-
-	5. Type the following command to connect/select this database
-		# \c transport_management_system
-	
-	6. To Create the relations locallcy in the system run the following queries in your system
-
-	-----------------------------------------------------------------------------------------
-	Instead of manually copy-pasting these sql statements you can execute this file your terminal
-	After creating the database(After step 4) open the terminal where this file is located
-
-	1. Connect to the relevant database eg.
-		sudo -u postgres psql transport_management_system
-	2.Then run
-		\i database.sql
-		\i insert_dummy_val.sql
-
-	\i means execute commands from file
-
-		All commands will be executed
-*/ 
-
-/*
-DROP DATABASE transport_management_system ;
-CREATE DATABASE transport_management_system ;
-\c transport_management_system
-*/
 
 CREATE TABLE Stu_Per_Data (
 	USN VARCHAR PRIMARY KEY NOT NULL,
@@ -84,8 +45,10 @@ CREATE TABLE Trip (
 	 Driver_id VARCHAR REFERENCES Driver (Driver_id),
 	 trip_id INT,
 	 trip_date DATE,
+
 	 status BOOLEAN DEFAULT FALSE,
 	 route_data varchar
+
 
 );
 
@@ -142,3 +105,4 @@ CREATE TABLE College_Loc(
 	PRIMARY KEY(latitude, longitude)
 );
 --INSERT INTO College_Loc VALUES (12.9345,77.5345);
+

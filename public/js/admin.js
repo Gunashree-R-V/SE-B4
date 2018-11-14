@@ -29,6 +29,7 @@ $(document).ready(function(){
         }
     }
     updateTrips = (trips) => {
+
     }
     
     renderUsers1 = (users) => {
@@ -41,6 +42,7 @@ $(document).ready(function(){
             userApprovalTab.appendChild(User);
         }
     }
+
 
     renderTrips = (trips) => {
         var trackTripsTab = document.getElementById('track-trips-tab');
@@ -69,6 +71,7 @@ $(document).ready(function(){
                             <div><p>Time : ${trips[tripIndex].timing}</p></div>
                             <div><p>Number of Students : ${trips[tripIndex].noofstudents}</p></div>
                         </div>
+
                             `;
             trackTripsTab.appendChild(trip);
         }
@@ -90,6 +93,7 @@ $(document).ready(function(){
             error:displayError
         });
     }
+
     function blockStudents () {
         var get1 = document.getElementById("myInput").value;
        var data = { AId : get1,Func:"block"};

@@ -249,6 +249,18 @@ const updateTrips = (user) => {
     return clusters;
   }
   const calcRoutes = (cluster,res1,dict,i,res)=>{
+    const getDropPick= (tripId)=>
+    {
+      return new Promise((resolve, reject)=>{
+        const get_drop_pick=`select drop_pick from fut_trip where trip_id=${tripId}`;
+        const dbConn = new pg.Client(config);
+        dbConn.connect();
+        dbConn.query(get_drop_pick)
+        .then((res)=>{
+          resolve(res.rows[0].drop_pick);
+        })
+      })
+    }
     console.log("points =",cluster.points);
     googleMapsClient.directions({
       origin: [12.934528, 77.533794],
@@ -272,6 +284,10 @@ const updateTrips = (user) => {
         getTripId()
         .then((fut_trip)=>
         {
+          getDropPick(fut_trip.rows[0].trip_id)
+          .then((dropPick)=>{
+
+
           var durationObj=route_data.json.routes[0].legs;
           var total_duration=0;
           var datetime = Moment(fut_trip.rows[0].timing,'HH:mm:ss');
@@ -280,7 +296,9 @@ const updateTrips = (user) => {
           {
             total_duration+=durationObj[iter].duration.value;
           }
-          var bus_time=datetime.subtract(total_duration,'seconds')
+          bus_time=datetime;
+          if(dropPick==false)
+            var bus_time=datetime.subtract(total_duration,'seconds');
           console.log(bus_time);
           var date=fut_trip.rows[0].trip_date.getFullYear()+'-'+fut_trip.rows[0].trip_date.getMonth()+'-'+fut_trip.rows[0].trip_date.getDate();
           console.log(typeof(fut_trip.rows[0].trip_date));
@@ -323,10 +341,12 @@ const updateTrips = (user) => {
               var time=stu_time.hour()+":"+stu_time.minute()+":"+stu_time.second();
               console.log("Time for student ",stu_time);
               const store_stu_trip = `update stu_trip_data set route_no=${res} , timing='${time}'where uid = ${uid}`;
+
               const notify = false
               if(notify) {
                 notifyStudent(res, time, uid);
               }
+
               dbConn.query(store_stu_trip)
               .then(res=>
                 {
@@ -338,92 +358,93 @@ const updateTrips = (user) => {
           })
 
       })
+    })
 
-  })
-}
-  var dataset = new Array();
-  const clientTrip = new pg.Client(config);
+    })
+    }
+    var dataset = new Array();
+    const clientTrip = new pg.Client(config);
 
-  return new Promise((resolve,reject) => {
-      clientTrip.connect()
-        .then(() =>
-        getLocationForTrip()
-        .then(res => {
-                    clientTrip.end();
-                    var dict =[];
-                    var latlang=[];
-                    for(var j=0;j<2;j++)
-                    {
-                      for(var i=0;i<res[j].rows.length;i++)
+    return new Promise((resolve,reject) => {
+        clientTrip.connect()
+          .then(() =>
+          getLocationForTrip()
+          .then(res => {
+                      clientTrip.end();
+                      var dict =[];
+                      var latlang=[];
+                      for(var j=0;j<2;j++)
                       {
-
-                        latlang.push([res[j].rows[i].latitude,res[j].rows[i].longitude]);
-                        if(typeof dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude]=='undefined')
-                        {
-                          dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude]=[res[j].rows[i].uid];
-                        }
-                        else
-                        {
-                          dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude].push(res[j].rows[i].uid);
-                        }
-
-
-                      }
-                    }
-                    var clust_num=6;
-                    clusterMaker.k(clust_num);
-                    clusterMaker.iterations(750);
-                    clusterMaker.data(latlang);
-                    clusters=clusterMaker.clusters();
-                    console.log("Unoptimized clusters "+clusters);
-
-                    clusters=optimize(clusters);
-                    console.log("optimized Clusters"+clusters);
-                    getAvlDriverBus().then(function(res1)
-                    {
-                      // console.log(res1[1]);
-                      const clientTrip = new pg.Client(config);
-                      clientTrip.connect();
-
-
-                      clientTrip.query('delete from trip')
-                      .then(()=>{
-                        clientTrip.end();
-                        var skipCount=0;
-                        for(var i=0;i<clusters.length;i++)
+                        for(var i=0;i<res[j].rows.length;i++)
                         {
 
-                          if(typeof(clusters[i])!='undefined')
-                            calcRoutes(clusters[i],res1,dict,i-skipCount,0);
+                          latlang.push([res[j].rows[i].latitude,res[j].rows[i].longitude]);
+                          if(typeof dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude]=='undefined')
+                          {
+                            dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude]=[res[j].rows[i].uid];
+                          }
                           else
-                            skipCount+=1;
-                        }
-                      })
-                    });
-                      const clientTrip1 = new pg.Client(config);
-                      clientTrip1.connect()
-                      clientTrip1.query('select * from trip')
-                      .then(res=>
-                      {
-                        clientTrip1.end();
-                        dataset=res;
-                      })
+                          {
+                            dict[res[j].rows[i].latitude + '' + res[j].rows[i].longitude].push(res[j].rows[i].uid);
+                          }
 
-        })
+
+                        }
+                      }
+                      var clust_num=6;
+                      clusterMaker.k(clust_num);
+                      clusterMaker.iterations(750);
+                      clusterMaker.data(latlang);
+                      clusters=clusterMaker.clusters();
+                      console.log("Unoptimized clusters "+clusters);
+
+                      clusters=optimize(clusters);
+                      console.log("optimized Clusters"+clusters);
+                      getAvlDriverBus().then(function(res1)
+                      {
+                        // console.log(res1[1]);
+                        const clientTrip = new pg.Client(config);
+                        clientTrip.connect();
+
+
+                        clientTrip.query('delete from trip')
+                        .then(()=>{
+                          clientTrip.end();
+                          var skipCount=0;
+                          for(var i=0;i<clusters.length;i++)
+                          {
+
+                            if(typeof(clusters[i])!='undefined')
+                              calcRoutes(clusters[i],res1,dict,i-skipCount,0);
+                            else
+                              skipCount+=1;
+                          }
+                        })
+                      });
+                        const clientTrip1 = new pg.Client(config);
+                        clientTrip1.connect()
+                        clientTrip1.query('select * from trip')
+                        .then(res=>
+                        {
+                          clientTrip1.end();
+                          dataset=res;
+                        })
+
+          })
+          .catch(err => {
+            reject(err);
+            console.log(`Fetch error: ${err}`);
+          })
+          .then(async ()=>{
+            resolve(dataset);
+            clientTrip.end();
+          })
+        )
         .catch(err => {
           reject(err);
-          console.log(`Fetch error: ${err}`);
-        })
-        .then(async ()=>{
-          resolve(dataset);
-          clientTrip.end();
-        })
-      )
-      .catch(err => {
-        reject(err);
-        console.log(`Connection error: ${err}`);
+          console.log(`Connection error: ${err}`);
+        });
       });
-    });
 }
 
 const blockUser = (userUSN) => {
@@ -536,4 +557,6 @@ const getTrips =  (user) => {
     });
 }
 
+
 module.exports = { approveUser, blockUser, getUsers, getTrips, getBlockUsers, updateTrips, tripJson };
+
