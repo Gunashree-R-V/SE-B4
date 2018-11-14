@@ -120,7 +120,9 @@ $(document).ready(function(){
     }
 
     blockStudent = (student) => {
+        document.getElementById("myInput").value="";
         alert("blocked the student successfully");
+        $(click).remove();
     }
 
     $('#student-approval').on('click',() => {
@@ -206,8 +208,9 @@ $('body').on('click','.approve',( function() {
     var url = '/admin/approve';  
     adminRequest(data, url);
 }));
-
+var click;
 $('body').on('click','.users',( function() {
    def1 =$(this).text();
+   click=$(this);
    $("#myInput").val(def1);
 }));

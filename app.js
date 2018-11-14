@@ -10,7 +10,7 @@ const signUp = require('./routes/signup');
 const login = require('./routes/login');
 const userTripUpdate = require('./routes/userTripUpdate');
 
-server.set('PORT', 4001);
+server.set('PORT', 4002);
 // Static pages which doesn't require Rest API calls. 
 // server.use(express.static(__dirname + '/public'));
 server.use(express.static('public'));
